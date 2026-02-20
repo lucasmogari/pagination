@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagination - Documentation</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <div class="logo">
+            <h1><a href="#home">Pagination</a></h1>
+          </div>
+          <ul class="nav-links">
+            <li><a href="#install" class="nav-link">Installation</a></li>
+            <li><a href="#usage" class="nav-link">Usage</a></li>
+            <li><a href="#api" class="nav-link">API</a></li>
+            <li><a href="#examples" class="nav-link">Examples</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Home Section -->
+      <section id="home" class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1>Pagination Made Simple</h1>
+            <p>
+              A lightweight, framework-agnostic JavaScript library for generating pagination items
+              with powerful customization options.
+            </p>
+            <div class="cta-buttons">
+              <a href="#install" class="btn btn-primary">Get Started</a>
+              <a href="https://github.com/lucasmogari/pagination" class="btn btn-secondary"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features">
+        <div class="container">
+          <h2>Features</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <h3>🎯 Framework Agnostic</h3>
+              <p>
+                Works with any JavaScript framework or vanilla JS. Use it with React, Vue, Angular,
+                or anything else.
+              </p>
+            </div>
+            <div class="feature-card">
+              <h3>⚙️ Highly Configurable</h3>
+              <p>
+                Customize every aspect of your pagination: items per page, max items to show, gaps,
+                arrows, first/last buttons.
+              </p>
+            </div>
+            <div class="feature-card">
+              <h3>📦 Lightweight</h3>
+              <p>Small bundle size with zero dependencies. Perfect for any project.</p>
+            </div>
+            <div class="feature-card">
+              <h3>🔄 Flexible Output</h3>
+              <p>
+                Get detailed pagination items with types for numbers, gaps, arrows, and boundary
+                controls.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Installation Section -->
+      <section id="install" class="section">
+        <div class="container">
+          <h2>Installation</h2>
+          <p>Install the package using your preferred package manager:</p>
+
+          <div class="code-tabs">
+            <button class="tab-btn active" data-tab="npm">npm</button>
+            <button class="tab-btn" data-tab="yarn">yarn</button>
+            <button class="tab-btn" data-tab="pnpm">pnpm</button>
+          </div>
+
+          <div class="tab-content">
+            <pre
+              id="npm"
+              class="tab-pane active"
+            ><code>npm install @lucasmogari/pagination</code></pre>
+            <pre id="yarn" class="tab-pane"><code>yarn add @lucasmogari/pagination</code></pre>
+            <pre id="pnpm" class="tab-pane"><code>pnpm add @lucasmogari/pagination</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Section -->
+      <section id="usage" class="section bg-light">
+        <div class="container">
+          <h2>Basic Usage</h2>
+
+          <h3>Simple Example</h3>
+          <p>
+            Import the pagination function and use it with a callback to handle pagination items:
+          </p>
+
+          <pre><code class="language-javascript">import pagination from '@lucasmogari/pagination';
+
+const items = (() => {
+  return pagination(
+    1,           // current page
+    100,         // total items
+    (item) => item,
+    {
+      itemsPerPage: 10,
+      maxPageItems: 7,
+      numbers: true,
+      arrows: true,
+      first: true,
+      last: true,
+      gapValues: false,
+    }
+  );
+})();
+
+console.log(items);
+// [
+//   { type: 'first', page: 1, current: true },
+//   { type: 'previous' },
+//   { type: 'page', page: 1, current: true },
+//   { type: 'page', page: 2 },
+//   ...
+// ]</code></pre>
+
+          <h3>React Example</h3>
+          <p>Use with React to create a pagination component:</p>
+
+          <pre><code class="language-javascript">import { useState } from 'react';
+import pagination from '@lucasmogari/pagination';
+
+export function Pagination({ totalItems }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const items = pagination(
+    currentPage,
+    totalItems,
+    (item) => item,
+    {
+      itemsPerPage: 10,
+      maxPageItems: 7,
+      numbers: true,
+      arrows: true,
+      first: true,
+      last: true,
+    });
+
+  return (
+    &lt;nav&gt;
+      {items.map((item, index) => (
+        &lt;button
+          key={index}
+          onClick={() => item.page && setCurrentPage(item.page)}
+          disabled={!item.page}
+          className={item.current ? 'active' : ''}
+        &gt;
+          {item.type === 'gap' ? '...' : item.page || (
+            item.type === 'previous' ? '←' : '→'
+          )}
+        &lt;/button&gt;
+      ))}
+    &lt;/nav&gt;
+  );
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- API Documentation Section -->
+      <section id="api" class="section">
+        <div class="container">
+          <h2>API Documentation</h2>
+
+          <div class="api-doc">
+            <h3>pagination()</h3>
+            <p>Main function to generate pagination items.</p>
+
+            <h4>Parameters</h4>
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>page</code></td>
+                  <td>number</td>
+                  <td>The current page number (1-indexed)</td>
+                </tr>
+                <tr>
+                  <td><code>totalItems</code></td>
+                  <td>number</td>
+                  <td>Total number of items to paginate</td>
+                </tr>
+                <tr>
+                  <td><code>callback</code></td>
+                  <td>function</td>
+                  <td>Callback function that receives each pagination item</td>
+                </tr>
+                <tr>
+                  <td><code>options</code></td>
+                  <td>object</td>
+                  <td>Configuration options (optional)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Options</h4>
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Option</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>itemsPerPage</code></td>
+                  <td>number</td>
+                  <td>1</td>
+                  <td>Number of items displayed per page</td>
+                </tr>
+                <tr>
+                  <td><code>maxPageItems</code></td>
+                  <td>number</td>
+                  <td>1</td>
+                  <td>Maximum number of page items to display</td>
+                </tr>
+                <tr>
+                  <td><code>numbers</code></td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Show page number items</td>
+                </tr>
+                <tr>
+                  <td><code>arrows</code></td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Show previous/next arrows</td>
+                </tr>
+                <tr>
+                  <td><code>first</code></td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Show first page button</td>
+                </tr>
+                <tr>
+                  <td><code>last</code></td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Show last page button</td>
+                </tr>
+                <tr>
+                  <td><code>gapValues</code></td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Include page numbers in gap items</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>PageItem Type</h4>
+            <p>The callback receives one of the following page item types:</p>
+
+            <pre><code class="language-typescript">type PageItem =
+  | { type: 'page'; page: number; current?: boolean }
+  | { type: 'previous'; page?: number }
+  | { type: 'next'; page?: number }
+  | { type: 'gap'; pages?: number[] }
+  | { type: 'first'; page: number; current?: boolean }
+  | { type: 'last'; page: number; current?: boolean };</code></pre>
+
+            <div class="item-types">
+              <div class="item-type">
+                <h5>page</h5>
+                <p>
+                  A regular page number. If <code>current</code> is true, it's the current page.
+                </p>
+              </div>
+              <div class="item-type">
+                <h5>previous</h5>
+                <p>Previous page button. <code>page</code> is set if not on first page.</p>
+              </div>
+              <div class="item-type">
+                <h5>next</h5>
+                <p>Next page button. <code>page</code> is set if not on last page.</p>
+              </div>
+              <div class="item-type">
+                <h5>gap</h5>
+                <p>
+                  Gap between page items (shows "..."). <code>pages</code> array available if
+                  <code>gapValues: true</code>.
+                </p>
+              </div>
+              <div class="item-type">
+                <h5>first</h5>
+                <p>First page button. If <code>current</code> is true, you're on the first page.</p>
+              </div>
+              <div class="item-type">
+                <h5>last</h5>
+                <p>Last page button. If <code>current</code> is true, you're on the last page.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Examples Section -->
+      <section id="examples" class="section bg-light">
+        <div class="container">
+          <h2>Examples</h2>
+
+          <div class="examples-list">
+            <div class="example-card">
+              <h3>Minimal Pagination</h3>
+              <p>Show only number buttons with arrows:</p>
+              <div class="demo-output">
+                <div id="demo-minimal" class="pagination-demo"></div>
+              </div>
+              <pre><code class="language-javascript">pagination(5, 100, callback, {
+  itemsPerPage: 10,
+  maxPageItems: 5,
+  numbers: true,
+  arrows: true,
+});</code></pre>
+            </div>
+
+            <div class="example-card">
+              <h3>Full-Featured Pagination</h3>
+              <p>All features enabled:</p>
+              <div class="demo-output">
+                <div id="demo-full" class="pagination-demo"></div>
+              </div>
+              <pre><code class="language-javascript">pagination(5, 100, callback, {
+  itemsPerPage: 10,
+  maxPageItems: 7,
+  numbers: true,
+  arrows: true,
+  first: true,
+  last: true,
+  gapValues: true,
+});</code></pre>
+            </div>
+
+            <div class="example-card">
+              <h3>Large Pages</h3>
+              <p>Smart pagination with many pages:</p>
+              <div class="demo-output">
+                <div id="demo-large" class="pagination-demo"></div>
+              </div>
+              <pre><code class="language-javascript">pagination(50, 1000, callback, {
+  itemsPerPage: 10,
+  maxPageItems: 9,
+  numbers: true,
+  arrows: true,
+  first: true,
+  last: true,
+  gapValues: false,
+});</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2026 Pagination. MIT License.</p>
+          <p>Made by <a href="https://github.com/lucasmogari">Lucas Mogari</a></p>
+        </div>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

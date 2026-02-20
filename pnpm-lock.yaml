@@ -36,6 +36,16 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@25.3.0)
 
+  packages/docs:
+    dependencies:
+      '@lucasmogari/pagination':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      vite:
+        specifier: ^7.3.1
+        version: 7.3.1(@types/node@25.3.0)
+
 packages:
 
   '@babel/helper-string-parser@7.27.1':
