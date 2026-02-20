@@ -3,12 +3,10 @@ import type { PageItem, PaginationOptions } from './index.js';
 import pagination from './index.js';
 
 const collect = (page: number, totalItems: number, options: Partial<PaginationOptions>) => {
-  const items: PageItem[] = [];
-  pagination(page, totalItems, (item) => items.push(item), {
+  return pagination(page, totalItems, (item) => item, {
     itemsPerPage: 5,
     ...options,
   });
-  return items;
 };
 
 const getPages = (items: PageItem[]) => items.filter((i) => i.type === 'page');

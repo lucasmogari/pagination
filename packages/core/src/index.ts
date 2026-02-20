@@ -6,7 +6,7 @@ type PageItem =
   | { type: 'first'; page: number; current?: boolean }
   | { type: 'last'; page: number; current?: boolean };
 
-type PaginationCallback = (pageItem: PageItem) => void;
+type PaginationCallback<T = void> = (pageItem: PageItem) => T;
 
 type PaginationOptions = {
   itemsPerPage: number;
@@ -23,28 +23,29 @@ export type { PageItem, PaginationCallback, PaginationOptions };
 const BOUNDARY_OFFSET = 2;
 const MIDDLE_PAGE_CALCULATION_OFFSET = 4;
 
-export default function pagination(
+export default function pagination<T = void>(
   page: number,
   totalItems: number,
-  callback: PaginationCallback,
+  callback: PaginationCallback<T>,
   options: Partial<PaginationOptions> = {},
-): void {
+): T[] {
+  const result: T[] = [];
   const itemsPerPage = options.itemsPerPage && options.itemsPerPage > 0 ? options.itemsPerPage : 1;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  if (totalPages <= 0) return;
+  if (totalPages <= 0) return result;
 
   const currentPage = page < 1 ? 1 : page > totalPages ? totalPages : page;
 
   if (options.first) {
     const pageItem: PageItem = { type: 'first', page: 1 };
     if (currentPage === 1) pageItem.current = true;
-    callback(pageItem);
+    result.push(callback(pageItem));
   }
 
   if (options.arrows) {
     const pageItem: PageItem = { type: 'previous' };
     if (currentPage > 1) pageItem.page = currentPage - 1;
-    callback(pageItem);
+    result.push(callback(pageItem));
   }
 
   if (options.numbers) {
@@ -54,10 +55,10 @@ export default function pagination(
       for (let i = 1; i <= totalPages; i++) {
         const pageItem: PageItem = { type: 'page', page: i };
         if (currentPage === i) pageItem.current = true;
-        callback(pageItem);
+        result.push(callback(pageItem));
       }
     } else if (maxPageItems === 1) {
-      callback({ type: 'page', page: currentPage, current: true });
+      result.push(callback({ type: 'page', page: currentPage, current: true }));
     } else if (maxPageItems > 4) {
       const getToken = (pageItemIndex: number): number | 'gap' => {
         if (pageItemIndex === 1) {
@@ -121,11 +122,11 @@ export default function pagination(
           if (gapPages) {
             pageItem.pages = gapPages;
           }
-          callback(pageItem);
+          result.push(callback(pageItem));
         } else {
           const pageItem: PageItem = { type: 'page', page: token as number };
           if (currentPage === token) pageItem.current = true;
-          callback(pageItem);
+          result.push(callback(pageItem));
         }
       }
     } else {
@@ -140,7 +141,7 @@ export default function pagination(
       for (let i = startPage; i <= endPage; i++) {
         const pageItem: PageItem = { type: 'page', page: i };
         if (currentPage === i) pageItem.current = true;
-        callback(pageItem);
+        result.push(callback(pageItem));
       }
     }
   }
@@ -148,12 +149,14 @@ export default function pagination(
   if (options.arrows) {
     const pageItem: PageItem = { type: 'next' };
     if (currentPage < totalPages) pageItem.page = currentPage + 1;
-    callback(pageItem);
+    result.push(callback(pageItem));
   }
 
   if (options.last) {
     const pageItem: PageItem = { type: 'last', page: totalPages };
     if (currentPage === totalPages) pageItem.current = true;
-    callback(pageItem);
+    result.push(callback(pageItem));
   }
+
+  return result;
 }
