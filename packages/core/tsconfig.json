@@ -16,6 +16,6 @@
     "noEmit": true,
     "types": ["node", "vitest/globals"]
   },
-  "include": ["packages/core/src"],
+  "include": ["./src"],
   "exclude": ["./dist"]
 }
