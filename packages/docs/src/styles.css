@@ -180,11 +180,9 @@ a:hover {
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: var(--shadow);
-  transition: all 0.3s;
 }
 
 .feature-card:hover {
-  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 

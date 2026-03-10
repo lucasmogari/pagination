@@ -52,17 +52,13 @@ function renderPaginationDemo(containerId, page, totalItems, options) {
         if (item.page) {
           button.onclick = () => renderPaginationDemo(containerId, item.page, totalItems, options);
         }
-        if (item.current) {
-          button.classList.add('active');
-        }
+        button.disabled = item.current;
       } else if (item.type === 'last') {
         button.textContent = '»';
         if (item.page) {
           button.onclick = () => renderPaginationDemo(containerId, item.page, totalItems, options);
         }
-        if (item.current) {
-          button.classList.add('active');
-        }
+        button.disabled = item.current;
       } else {
         button.textContent = item.page;
         if (item.current) {

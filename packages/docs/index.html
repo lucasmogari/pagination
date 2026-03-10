@@ -112,8 +112,7 @@
 
           <pre><code class="language-javascript">import pagination from '@lucasmogari/pagination';
 
-const items = (() => {
-  return pagination(
+const items = pagination(
     1,           // current page
     100,         // total items
     (item) => item,
@@ -127,7 +126,6 @@ const items = (() => {
       gapValues: false,
     }
   );
-})();
 
 console.log(items);
 // [
