@@ -302,6 +302,14 @@ pre code {
   margin-top: 2rem;
 }
 
+.parameters-section {
+  overflow: auto;
+}
+
+.options-section {
+  overflow: auto;
+}
+
 .api-table {
   width: 100%;
   border-collapse: collapse;

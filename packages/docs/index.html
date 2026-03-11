@@ -188,93 +188,97 @@ export function Pagination({ totalItems }) {
             <p>Main function to generate pagination items.</p>
 
             <h4>Parameters</h4>
-            <table class="api-table">
-              <thead>
-                <tr>
-                  <th>Parameter</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>page</code></td>
-                  <td>number</td>
-                  <td>The current page number (1-indexed)</td>
-                </tr>
-                <tr>
-                  <td><code>totalItems</code></td>
-                  <td>number</td>
-                  <td>Total number of items to paginate</td>
-                </tr>
-                <tr>
-                  <td><code>callback</code></td>
-                  <td>function</td>
-                  <td>Callback function that receives each pagination item</td>
-                </tr>
-                <tr>
-                  <td><code>options</code></td>
-                  <td>object</td>
-                  <td>Configuration options (optional)</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="parameters-section">
+              <table class="api-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>page</code></td>
+                    <td>number</td>
+                    <td>The current page number (1-indexed)</td>
+                  </tr>
+                  <tr>
+                    <td><code>totalItems</code></td>
+                    <td>number</td>
+                    <td>Total number of items to paginate</td>
+                  </tr>
+                  <tr>
+                    <td><code>callback</code></td>
+                    <td>function</td>
+                    <td>Callback function that receives each pagination item</td>
+                  </tr>
+                  <tr>
+                    <td><code>options</code></td>
+                    <td>object</td>
+                    <td>Configuration options (optional)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <h4>Options</h4>
-            <table class="api-table">
-              <thead>
-                <tr>
-                  <th>Option</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>itemsPerPage</code></td>
-                  <td>number</td>
-                  <td>1</td>
-                  <td>Number of items displayed per page</td>
-                </tr>
-                <tr>
-                  <td><code>maxPageItems</code></td>
-                  <td>number</td>
-                  <td>1</td>
-                  <td>Maximum number of page items to display</td>
-                </tr>
-                <tr>
-                  <td><code>numbers</code></td>
-                  <td>boolean</td>
-                  <td>false</td>
-                  <td>Show page number items</td>
-                </tr>
-                <tr>
-                  <td><code>arrows</code></td>
-                  <td>boolean</td>
-                  <td>false</td>
-                  <td>Show previous/next arrows</td>
-                </tr>
-                <tr>
-                  <td><code>first</code></td>
-                  <td>boolean</td>
-                  <td>false</td>
-                  <td>Show first page button</td>
-                </tr>
-                <tr>
-                  <td><code>last</code></td>
-                  <td>boolean</td>
-                  <td>false</td>
-                  <td>Show last page button</td>
-                </tr>
-                <tr>
-                  <td><code>gapValues</code></td>
-                  <td>boolean</td>
-                  <td>false</td>
-                  <td>Include page numbers in gap items</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="options-section">
+              <table class="api-table">
+                <thead>
+                  <tr>
+                    <th>Option</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>itemsPerPage</code></td>
+                    <td>number</td>
+                    <td>1</td>
+                    <td>Number of items displayed per page</td>
+                  </tr>
+                  <tr>
+                    <td><code>maxPageItems</code></td>
+                    <td>number</td>
+                    <td>1</td>
+                    <td>Maximum number of page items to display</td>
+                  </tr>
+                  <tr>
+                    <td><code>numbers</code></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Show page number items</td>
+                  </tr>
+                  <tr>
+                    <td><code>arrows</code></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Show previous/next arrows</td>
+                  </tr>
+                  <tr>
+                    <td><code>first</code></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Show first page button</td>
+                  </tr>
+                  <tr>
+                    <td><code>last</code></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Show last page button</td>
+                  </tr>
+                  <tr>
+                    <td><code>gapValues</code></td>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>Include page numbers in gap items</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <h4>PageItem Type</h4>
             <p>The callback receives one of the following page item types:</p>
